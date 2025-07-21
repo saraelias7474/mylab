@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django DB
+*.sqlite3
+*.db
+
+# Env & virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# VSCode & PyCharm config
+.vscode/
+.idea/
+
+# Media & static (runtime-generated)
+media/
+static/
+staticfiles/
+
+# Secret files & config
+.env
+.env.*
+*.secret
+*.key
+
+# Node.js dependencies (if present)
+node_modules/
+
+# Logs & debug
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+
+# Git
+*.orig
+*.rej
