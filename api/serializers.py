@@ -44,14 +44,16 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model=Book
         fields=('book_id','ISBN','title','authors','description',
-                'price','publication_date','book_cover_photo'
+                'price','publication_date','book_cover_photo','availability'
                 ,'category','avg_rating','total_reviews','created_at','updated_at')
 
 class BookListSerializer( serializers.ModelSerializer ) :
-    authors = serializers.SlugRelatedField( read_only = True  , slug_field = 'author_name' , many = True )
+
+    authors = AuthorsSerializer(many=True)
+    # authors = serializers.SlugRelatedField( read_only = True  , slug_field = 'author_name' , many = True )
     class Meta :
         model = Book
-        fields = [ 'book_id' , 'title' , 'authors' , 'price' , 'book_cover_photo' ]
+        fields = [ 'book_id' , 'title' , 'authors' , 'price' , 'book_cover_photo',]
 
 #Review serializer
 class ReviewSerializer(serializers.ModelSerializer):

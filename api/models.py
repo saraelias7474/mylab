@@ -95,24 +95,14 @@ class Authors(models.Model):
     def __str__(self):
         return self.author_name
 
-    # @property
-    # def books_count(self):
-    #     """Get total number of books by this author"""
-    #     return self.books.count()
 
 
 # Book Model - Following ERD specifications
 class Book(models.Model):
-    """
-    Books in the store
-    Fields from ERD: book_id (PK), ISBN, title, author (FK), description,
-    price, publication_date, book_cover_photo, format, quantity, category (FK),
-    avg_rating, total_reviewsa
-    """
-    # FORMAT_CHOICES = (
-    #     ('PDF', 'PDF'),
-    #     ('print', 'Printed'),
-    # )
+    AVAILABILITY_CHOICES = [
+        ('in_stock', 'In Stock'),
+        ('out_of_stock', 'Out of Stock'),
+    ]
 
     book_id = models.AutoField(primary_key=True)
     ISBN = models.CharField(max_length=13, unique=True)
@@ -126,7 +116,11 @@ class Book(models.Model):
     )
     publication_date = models.DateField()
     book_cover_photo = models.ImageField(upload_to='covers/')
-    # format = models.CharField(max_length=10, choices=FORMAT_CHOICES, default='PDF')
+    availability = models.CharField(
+        max_length=20,
+        choices=AVAILABILITY_CHOICES,
+        default='in_stock'
+    )
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='books')
     avg_rating = models.DecimalField(
         max_digits=3,
