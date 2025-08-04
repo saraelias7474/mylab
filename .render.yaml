@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: my-django-app
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn library.wsgi"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: library.settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: my-django-db
+          property: connectionString
+
+databases:
+  - name: my-django-db
+    databaseName: mydb
+    user: myuser
