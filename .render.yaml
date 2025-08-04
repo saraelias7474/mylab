@@ -11,6 +11,8 @@ services:
         fromDatabase:
           name: my-django-db
           property: connectionString
+    preDeployCommand: |
+      python manage.py migrate
 
 databases:
   - name: my-django-db
