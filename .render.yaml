@@ -9,12 +9,12 @@ services:
         value: library.settings
       - key: DATABASE_URL
         fromDatabase:
-          name: my-django-db       # ✅ نفس الاسم كما في الأسفل
+          name: mylabdb
           property: connectionString
     preDeployCommand: "python manage.py migrate"
 
+
 databases:
-  - name: my-django-db           # ✅ يجب أن يطابق الاسم بالأعلى
+  - name: mylabdb
     databaseName: mydb
     user: myuser
-
