@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'library.urls'
@@ -80,14 +81,9 @@ WSGI_APPLICATION = 'library.wsgi.application'
 
 import dj_database_url
 import os
+from decouple import config
 
-if os.environ.get('RENDER'):
-
-    DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
-}
-else:
-    DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mybookstore',
@@ -98,6 +94,11 @@ else:
 
     }
 }
+
+DATABASES= {
+    'default':dj_database_url.parse(config('DATABASE_URL'))
+}
+
 
 
 # Password validation
@@ -135,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
 
 
 # Default primary key field type
