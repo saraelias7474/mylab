@@ -1,1 +1,1 @@
-web: gunicorn library.wsgi
+web: --bind 0.0.0.0:<PORT> gunicorn library.wsgi:application
